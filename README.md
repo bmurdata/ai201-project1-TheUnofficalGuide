@@ -13,6 +13,7 @@
      Why is this knowledge valuable, and why is it hard to find through official channels?
      Example: "Student reviews of CS professors at [university] — useful because official
      course descriptions don't reflect teaching style, exam difficulty, or workload." -->
+     Civil Service pathways for internships or full time jobs. Students oftne do not know steps or requirements, and there are normal interns and civil service title ones that make it complicated. A system to generalize options and value would be of value.
 
 ---
 
@@ -24,16 +25,16 @@
 
 | # | Source | Type | URL or file path |
 |---|--------|------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
+| 1 | NYC Government |Website |https://www.nyc.gov/site/dcas/employment/urban-fellows-program-information.page |
+| 2 | NYC Government | Website-general information |https://www.nyc.gov/site/dcas/employment/internship-and-fellowships-civil-service-pathways-fellowship.page |
+| 3 | NYC Government Exam|PDF withe exam information for electrical engineering interns|https://www.nyc.gov/assets/dcas/downloads/pdf/noes/20266047000.pdf |
+| 4 |NYC Gov Exam |PDF woth information about Computer Associate Title |https://www.nyc.gov/assets/dcas/downloads/pdf/noes/20255050000.pdf |
+| 5 |NYC Gov Exam |PDF woth information about Bridge for Various titles|https://www.nyc.gov/assets/dcas/downloads/pdf/noes/20222978000.pdf |
+| 6 |MTA NYC Site |Website with information about  Cybersecurity Internships|https://careers.mta.org/jobs/17731475-cyber-security-operational-technology-and-engineer-fellow-fall |
+| 7 |MTA NYC Site |Website with information about Data Analyst Internships|https://careers.mta.org/jobs/17728691-data-analyst-emerging-talent-intern-fall |
+| 8 |MTA jobs thread |Reddit thread about frustration with the process |https://www.reddit.com/r/AskNYC/comments/1mmwpn6/why_the_hell_cant_i_find_a_job_with_the_mta/ |
+| 9 | OSA union wesbite for staff analysts|Website |https://www.osaunion.org/exam/main.html |
+| 10 |Reddit |Thread discussing if civil service is worth it |https://www.reddit.com/r/nycpublicservants/comments/1oeadpj/who_regrets_joining_the_nyc_government_job/ |
 
 ---
 
@@ -45,15 +46,15 @@
      - Overlap size and why (or why not) you used overlap
      - Any preprocessing you did before chunking (e.g., stripping HTML, removing headers)
      - What your final chunk count was across all documents -->
-
+I will try fixe size 
 **Chunk size:**
-
+My chunk size should be about 250 characters, as most of my sources are from government notices which are long.
 **Overlap:**
-
+Overlap size should be 100.
 **Why these choices fit your documents:**
-
+Toward the end of some paragraphs things repeat and start again in the next chunk.
 **Final chunk count:**
-
+The system should use the top 10 chunks as all the information should be there. For the exams, information about requirements is toward the top and for reddit threads or general information sites the information is small enough where 10 chunks should suffice.
 ---
 
 ## Embedding Model
@@ -65,9 +66,9 @@
      latency, and local vs. API-hosted. -->
 
 **Model used:**
-
+all-MiniLM-L6-v2 via sentence-transformers
 **Production tradeoff reflection:**
-
+This model was used for local use and lower requirements. I chose the top-k approach to get 10 chunks per query. If cose wasnt an issue I would choose an API based system as I wouldnt have to manage my own system or hardware.
 ---
 
 ## Grounded Generation
@@ -80,7 +81,7 @@
      the mechanism. -->
 
 **System prompt grounding instruction:**
-
+You are a college guidance counseler who has been asked to help students find internships or jobs in local NYC government or MTA. You have been asked to read documents and information sites to give students a feel for how to apply and the timeframe expected to get a job or internship. Students have given you 10 documents as examples of interests and want answers based on them. 
 **How source attribution is surfaced in the response:**
 
 ---
